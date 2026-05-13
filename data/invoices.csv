@@ -1,0 +1,13 @@
+invoice_no,client_name,amount,due_date,email,payment_link
+INV-2001,Maple Retail Pvt Ltd,4200,2026-05-10,maple@example.com,https://pay.example.com/2001
+INV-2002,Northstar Logistics,15800,2026-05-04,northstar@example.com,https://pay.example.com/2002
+INV-2003,Vertex Digital Solutions,27500,2026-04-28,vertex@example.com,https://pay.example.com/2003
+INV-2004,Apex Manufacturing Group,64000,2026-04-21,apex@example.com,https://pay.example.com/2004
+INV-2005,BlueOrbit Technologies,9800,2026-04-15,blueorbit@example.com,https://pay.example.com/2005
+INV-2006,Crescent Healthcare,123000,2026-03-30,crescent@example.com,https://pay.example.com/2006
+INV-2007,UrbanNest Interiors,7600,2026-05-08,urban@example.com,https://pay.example.com/2007
+INV-2008,QuantumCore Systems,34500,2026-04-26,quantum@example.com,https://pay.example.com/2008
+INV-2009,EverPeak Consulting,18900,2026-04-18,everpeak@example.com,https://pay.example.com/2009
+INV-2010,Silverline Foods,5100,2026-03-25,silverline@example.com,https://pay.example.com/2010
+INV-2011,Helios Energy Corp,87000,2026-05-12,helios@example.com,https://pay.example.com/2011
+INV-2012,OrbitWave Media,14200,2026-05-01,orbitwave@example.com,https://pay.example.com/2012
