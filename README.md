@@ -367,9 +367,11 @@ http://localhost:8501
 
 ---
 
-# 📸 Screenshots
+# 🎥 Demo Video
 
-![Project Screenshot](screencapture-localhost-8501-2026-05-14-09_23_43.png)
+[![Watch the Demo](screencapture-localhost-8501-2026-05-14-09_23_43.png)](https://drive.google.com/file/d/1N190ruzn0IUsVN1GupWFGEqNjtCrbM3O/view?usp=sharing)
+
+Click the image above to watch the full project walkthrough.
 
 ---
 # ✉️ Sample Generated Emails
