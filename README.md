@@ -1,22 +1,41 @@
 # 💰 Finance AI Agent Dashboard
 
-An AI-powered finance operations dashboard built with Streamlit and Python to automate invoice escalation workflows, generate contextual payment reminder emails, and maintain audit logs.
+An AI-powered finance workflow automation system built using Python, Streamlit, and Llama 3 to automate overdue invoice follow-ups, generate escalation-aware payment reminder emails, and maintain operational audit logs.
 
-The system simulates how modern finance teams handle overdue invoices using intelligent escalation logic and AI-generated communication workflows.
+The project simulates how modern finance teams can use AI agents to automate repetitive collections workflows while maintaining controlled escalation behavior, traceability, and operational safety.
 
 ---
 
 # 🚀 Project Overview
 
-Managing overdue invoices manually is repetitive, error-prone, and difficult to scale. This project demonstrates how AI agents can assist finance operations teams by:
+Managing overdue invoices manually is repetitive, inconsistent, and difficult to scale efficiently. Finance teams often spend significant operational effort:
+- tracking unpaid invoices,
+- calculating overdue durations,
+- drafting reminder emails,
+- escalating unresolved cases, and
+- maintaining communication records.
 
-- Tracking overdue invoices
-- Automatically determining escalation stages
-- Generating professional reminder emails using an LLM
-- Maintaining audit logs for compliance and traceability
-- Providing a real-time operational dashboard
+This project demonstrates how AI agents can automate these workflows using:
+- rule-based escalation logic,
+- LLM-powered email generation,
+- workflow automation,
+- dashboard monitoring, and
+- audit logging.
 
-The application acts as a lightweight internal finance operations assistant.
+The system acts as a lightweight finance operations assistant capable of autonomously generating contextual payment reminders with progressively escalating tone and urgency.
+
+---
+
+# 🎯 Key Capabilities
+
+- Autonomous overdue invoice analysis
+- Dynamic escalation stage assignment
+- AI-generated contextual reminder emails
+- SMTP + dry-run delivery modes
+- Audit logging and traceability
+- Streamlit operational dashboard
+- Scheduler-ready workflow automation
+- Security-conscious architecture
 
 ---
 
@@ -24,13 +43,14 @@ The application acts as a lightweight internal finance operations assistant.
 
 - AI-generated invoice reminder emails
 - Automated escalation stage detection
+- Progressive tone escalation logic
 - Interactive Streamlit dashboard
-- Search and filtering support
-- Escalation analytics and charts
-- CSV export functionality
+- Escalation analytics and metrics
 - Audit logging system
-- Mock email delivery workflow
+- DRY_RUN safe testing mode
+- Real SMTP email integration
 - Modular Python architecture
+- Scheduler-ready automation workflow
 
 ---
 
@@ -41,44 +61,36 @@ The application acts as a lightweight internal finance operations assistant.
 | Frontend Dashboard | Streamlit |
 | Backend Logic | Python |
 | Data Processing | Pandas |
-| AI Email Generation | OpenAI API |
+| AI Email Generation | Llama 3 via Ollama |
+| Scheduling | APScheduler |
+| Validation | Pydantic |
 | Logging | JSONL |
 | Data Storage | CSV |
 
 ---
 
-# 🧠 LLM & Framework Choice
+# 🧠 LLM Choice: Llama 3 (Local Inference via Ollama)
 
-## LLM Choice: OpenAI GPT Models
+The project uses Meta’s Llama 3 model running locally through Ollama.
 
-The OpenAI API was selected because:
+This approach was selected because:
 
-- Strong natural language generation quality
-- Reliable structured email generation
-- Good contextual understanding
-- Fast inference performance
-- Simple Python SDK integration
+- Eliminates cloud API costs during development
+- Improves privacy by keeping invoice data local
+- Enables unrestricted experimentation
+- Provides strong instruction-following performance
+- Avoids external API dependency issues
 
-The model is used to generate finance-friendly invoice reminder emails with escalation-aware tone adaptation.
+The model is responsible for generating escalation-aware finance reminder emails with progressively changing tone and urgency.
 
-Example:
-- Stage 1 → Polite reminder
-- Stage 3 → Firm payment notice
-- Escalation → Legal/finance escalation language
+## Escalation Progression
 
----
-
-## Framework Choice: Streamlit
-
-Streamlit was chosen because:
-
-- Rapid dashboard development
-- Excellent support for data applications
-- Native Python workflow
-- Minimal frontend complexity
-- Fast prototyping for AI/internal tools
-
-This allows focus on AI workflow automation rather than frontend engineering overhead.
+| Stage | Tone |
+|---|---|
+| Stage 1 | Warm & Friendly |
+| Stage 2 | Polite but Firm |
+| Stage 3 | Formal & Serious |
+| Stage 4 | Stern & Urgent |
 
 ---
 
@@ -107,20 +119,45 @@ This allows focus on AI workflow automation rather than frontend engineering ove
                 | Email Generator (LLM)   |
                 +-------------------------+
                               |
-               +--------------+--------------+
-               |                             |
-               v                             v
-     +------------------+         +------------------+
-     | Mock Email Sender|         | Audit Logger     |
-     +------------------+         +------------------+
-               |                             |
-               +--------------+--------------+
+                              v
+                  +----------------------+
+                  |   Validation Layer   |
+                  +----------------------+
                               |
                               v
-                 +-----------------------+
-                 | Streamlit Dashboard   |
-                 +-----------------------+
+                  +----------------------+
+                  |   Dispatcher Layer   |
+                  +----------------------+
+                     |              |
+                     v              v
+             +-------------+   +-------------+
+             |   DRY_RUN   |   | SMTP Sender |
+             +-------------+   +-------------+
+                     |              |
+                     +------+-------+
+                            |
+                            v
+                  +----------------------+
+                  |    Audit Logger      |
+                  +----------------------+
+                            |
+                            v
+                  +----------------------+
+                  |  Streamlit Dashboard |
+                  +----------------------+
+
+---
 ```
+# 📬 Delivery Modes
+
+The system supports two delivery configurations:
+
+| Mode | Description |
+|---|---|
+| DRY_RUN | Simulates sending emails safely during testing |
+| SMTP | Sends real emails using Gmail SMTP integration |
+
+This architecture enables safe experimentation while supporting real workflow execution.
 
 ---
 
@@ -184,6 +221,17 @@ The project separates:
 This reduces security and maintenance risks caused by tightly coupled code.
 
 ---
+# 💡 Why This Project Matters
+
+Finance teams spend significant operational effort following up on overdue payments manually. This project demonstrates how AI agents can automate repetitive collections workflows while maintaining controlled escalation logic, auditability, and operational safety.
+
+The focus of the system is not only AI text generation, but also:
+- workflow orchestration,
+- observability,
+- validation,
+- safe automation design, and
+- human-in-the-loop escalation control.
+---
 
 # 📂 Project Structure
 
@@ -193,9 +241,12 @@ finance-ai-agent/
 ├── app/
 │   ├── config.py
 │   ├── data_loader.py
+│   ├── dispatcher.py
 │   ├── email_generator.py
 │   ├── escalation_engine.py
 │   ├── logger.py
+│   ├── real_sender.py
+│   ├── scheduler.py
 │   └── sender.py
 │
 ├── data/
@@ -205,6 +256,7 @@ finance-ai-agent/
 │   └── audit_log.jsonl
 │
 ├── dashboard.py
+├── main.py
 ├── requirements.txt
 ├── README.md
 └── .gitignore
@@ -254,17 +306,30 @@ pip install -r requirements.txt
 
 ---
 
-## 4. Configure Environment Variables
+## 4. Install Ollama
 
-Create a `.env` file:
+Download and install Ollama:
 
 ```env
-OPENAI_API_KEY=your_api_key_here
+ollama run llama3
 ```
 
 ---
 
-## 5. Run the Application
+## 5. Configure Environment Variables
+
+Create a `.env` file:
+
+```env
+SEND_MODE=DRY_RUN
+
+EMAIL_ADDRESS=your_email@gmail.com
+EMAIL_APP_PASSWORD=your_app_password
+```
+
+---
+
+## 6. Run the Application
 
 ```bash
 streamlit run dashboard.py
@@ -304,13 +369,38 @@ http://localhost:8501
 
 # 📸 Screenshots
 
-Add screenshots after deployment.
+![Project Screenshot](screencapture-localhost-8501-2026-05-14-09_23_43.png)
 
-Example:
+---
+# ✉️ Sample Generated Emails
 
-```markdown
-![Dashboard Screenshot](screenshots/dashboard.png)
-```
+---
+
+## Stage 1 — Warm & Friendly
+
+**Subject:** Quick Reminder – Invoice INV-2001
+
+Hi Maple Retail Pvt Ltd,
+
+Just a friendly reminder that invoice INV-2001 for $4,200 is now 3 days overdue. The original due date was May 10, 2026.
+
+If you have already processed the payment, please disregard this message. Otherwise, you can complete the payment using the provided payment link.
+
+Thank you for your prompt attention.
+
+---
+
+## Stage 4 — Stern & Urgent
+
+**Subject:** FINAL NOTICE – Invoice INV-2005 – Immediate Action Required
+
+Dear BlueOrbit Technologies,
+
+This is your final reminder regarding invoice INV-2005 for $9,800, which is now 28 days overdue.
+
+Despite previous follow-ups, payment remains pending. Failure to settle the outstanding balance within the next 24 hours may result in escalation to our finance and recovery team for further action.
+
+Please process the payment immediately or contact us with a resolution plan to avoid escalation.
 
 ---
 
